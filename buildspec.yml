@@ -3,7 +3,7 @@ version: 0.2
 env:
   variables:
     AWS_REGION: ap-south-2
-    ECR_REPO: 991524241826.dkr.ecr.ap-south-2.amazonaws.com/student-service
+    ECR_REPO: 991524241826.dkr.ecr.ap-south-2.amazonaws.com/course-service
 
 phases:
   pre_build:
@@ -15,7 +15,7 @@ phases:
   build:
     commands:
       - echo Build started
-      - cd day2-microservices/student-service
+      - cd day2-microservices/course-service
       - docker build -t $ECR_REPO:$IMAGE_TAG .
       - docker tag $ECR_REPO:$IMAGE_TAG $ECR_REPO:latest
 
@@ -23,7 +23,7 @@ phases:
     commands:
       - echo Pushing image...
       - docker push $ECR_REPO:$IMAGE_TAG
-      - printf '[{"name":"student-service","imageUri":"%s"}]' $ECR_REPO:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"course-service","imageUri":"%s"}]' $ECR_REPO:$IMAGE_TAG > imagedefinitions.json
 
 artifacts:
   files:
